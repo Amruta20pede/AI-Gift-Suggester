@@ -1,0 +1,25 @@
+.loader-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 10vh;
+  }
+  
+  .loader-svg {
+    width: 2rem; 
+    height: 2rem; 
+    margin-right: 2rem; 
+    fill: #6469ff; 
+    animation: spin 2s linear infinite;
+  }
+  
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  

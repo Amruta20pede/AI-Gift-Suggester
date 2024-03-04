@@ -1,0 +1,31 @@
+
+.logo {
+  display: inline-block;
+  cursor: default;
+  margin-top: 1rem;
+  margin-left: 3rem;;
+  margin-right: auto;
+}
+.navbar{
+  height: 15vh;
+  display:flex;
+  align-items: center;
+  z-index: 100;
+}
+
+.navbar li{
+  font-size: 1.25rem;
+  font-weight: 600;
+  display :inline-block;
+  padding: 3rem ;
+  margin-right: 1rem;
+  
+}
+.navbar-link{
+  color: white;
+  
+}
+.navbar-link:hover{
+  color: blue;
+  text-decoration: none;
+}
