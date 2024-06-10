@@ -11,27 +11,36 @@ const PoetryGenerator = () => {
   
 
   const generatePoetry = async () => {
-    try {
-      const response = await axios.post(
-        'https://api.openai.com/v1/engines/gpt-3.5-turbo-instruct/completions',
-        {
-          prompt: `Please write a heartfelt poem on ${topic} in ${language} and that I can gift to ${relation}. The poem should convey deep emotions, such as love, gratitude, or admiration, and capture the essence of ${uniqueQualities}. Make it a beautiful and memorable gift that will touch their heart and make them feel truly special `,
-          max_tokens: 500,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            
-          },
-        }
-      );
+  try {
+    const prompt = `Please write a heartfelt poem on ${topic} in ${language} and that I can gift to ${relation}. The poem should convey deep emotions, such as love, gratitude, or admiration, and capture the essence of ${uniqueQualities}. Make it a beautiful and memorable gift that will touch their heart and make them feel truly special .`;
 
-      setPoetry(response.data.choices[0].text);
-    } catch (error) {
-      console.error('Error generating poetry:', error);
+    const response = await fetch("http://localhost:8000/api/v1/poem_generater", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        prompt
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`API request failed with status: ${response.status}`);
     }
-  };
 
+    const data = await response.json();
+    if (data.suggestions) {
+      const parsedSuggestions = JSON.parse(data.suggestions);
+      if (parsedSuggestions.message && parsedSuggestions.message.content) {
+        setPoetry(parsedSuggestions.message.content);
+      } else {
+        setPoetry('');
+      }
+    }
+  } catch (error) {
+    console.error('Error in  generating Poem:', error);
+  }
+};
   return (
     <div className="main-container">
       <div className="container">
@@ -72,7 +81,7 @@ const PoetryGenerator = () => {
       </div>
       {poetry && (
         <div>
-          <h2>Generated Poem:</h2>
+          <h2>Here is your Poem:</h2>
           <pre className="poem">{poetry}</pre>
         </div>
       )}

@@ -23,12 +23,12 @@ router.post('/', async (req, res, next) => {
 
     const gifts = [];
     for (const keyword of keywords) {
-      const serpapiResults = await get_product(keyword);
+      const serpapiResults =  get_product(keyword);
       for (const result of serpapiResults) {
         const gift = {
           idea: keyword,
           title: result.title || 'N/A',
-          link: result.link || 'N/A',
+          link:  `https://www.amazon.com/s?k=${encodeURIComponent(keyword)}`,
           price: result.price || 'N/A',
           old_price: result.old_price || 'N/A',
           second_hand_condition: result.second_hand_condition || 'N/A',

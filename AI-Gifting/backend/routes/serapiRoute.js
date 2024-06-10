@@ -25,7 +25,7 @@ router.route('/').post( async (req, res) => {
       hl: 'en',
       gl: 'in',
       location: 'India',
-      tbs: 'mr:1,price:1,ppr_max:150,merchagg:g113872638|m114193152|m7388148',
+      tbs: 'mr:1,price:1,ppr_max:50000,merchagg:g113872638|m114193152|m7388148',
       num: '2',
     };
 
